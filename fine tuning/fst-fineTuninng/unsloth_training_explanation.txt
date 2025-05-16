@@ -1,0 +1,59 @@
+Step-by-Step Explanation of the Unsloth LoRA Training Script
+
+1. Imports
+   - `unsloth.FastModel`, `UnslothTrainer`, `UnslothTrainingArguments`: Core classes for model loading, training, and argument handling.
+   - `datasets.load_dataset`: To load the JSONL dataset.
+   - `transformers.DataCollatorForSeq2Seq`: Prepares batches for seq2seq training.
+   - `peft.LoraConfig`, `get_peft_model`, `TaskType`: For setting up LoRA adapters on the model.
+
+2. Load the Base Model in 4-bit
+   - `FastModel.from_pretrained(..., load_in_4bit=True)` loads a quantized 1B-parameter Llama model, reducing memory footprint while retaining performance.
+
+3. Configure and Attach LoRA
+   - `LoraConfig`: 
+     • `task_type=TaskType.SEQ_2_SEQ_LM` specifies sequence-to-sequence language modeling.  
+     • `inference_mode=False` enables training mode for LoRA adapters.  
+     • `r=8`: The rank (number of low-rank adaptation vectors).  
+     • `lora_alpha=8`: Scaling factor for LoRA updates.  
+     • `lora_dropout=0.05`: Dropout probability on LoRA layers.
+   - `get_peft_model(model, lora_config)` wraps the base model, making only the LoRA parameters trainable.
+
+4. Formatting Function
+   - `formatting_func` takes raw `question` and `answer` pairs and formats them into a single instruction–response string:
+     ```
+     ### Question:
+     <question>
+
+     ### Answer:
+     <answer>
+     ```
+
+5. Load the Dataset
+   - `load_dataset("json", data_files={"train": "fusion_fr_dataset.jsonl"})` loads your custom JSONL into a `DatasetDict`.
+
+6. Training Arguments
+   - `UnslothTrainingArguments` sets hyperparameters:
+     • `output_dir="outputs"`: where checkpoints go.  
+     • `per_device_train_batch_size=8`: batch size per GPU/CPU.  
+     • `num_train_epochs=3`: total training passes.  
+     • `save_strategy="steps"`, `save_steps=100`: checkpoint every 100 steps.  
+     • `learning_rate=5e-5`, `embedding_learning_rate=5e-6`: learning rates for weights and embeddings.
+
+7. Data Collator
+   - `DataCollatorForSeq2Seq(tokenizer)` pads and batches sequences appropriately, ensuring labels align with tokenized inputs.
+
+8. Trainer Instantiation
+   - `UnslothTrainer` parameters:
+     • `model`, `tokenizer`: your LoRA-augmented model and tokenizer.  
+     • `train_dataset`: the loaded dataset.  
+     • `data_collator`: handles batch collation.  
+     • `args`: training arguments.  
+     • `formatting_func`: to preprocess raw examples.  
+     • `max_seq_length=2048`: maximum sequence length.  
+     • `dataset_num_proc=4`: number of processes for data preprocessing.
+
+9. Training and Saving
+   - `trainer.train()`: Runs the fine-tuning, updating only LoRA adapter weights.  
+   - `trainer.save_model("lora-1b-instruct-adapter")` and `tokenizer.save_pretrained("lora-1b-instruct-adapter")` persist the fine-tuned adapter and tokenizer to disk.
+
+This pipeline efficiently fine-tunes a large language model using quantization and parameter-efficient LoRA adapters, reducing computational requirements and memory usage while achieving strong performance.

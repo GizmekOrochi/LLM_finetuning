@@ -1,0 +1,47 @@
+Step-by-Step Explanation of generate_dataset.py
+
+1. Module Docstring
+   - Describes the purpose: generate a JSONL dataset of specified size with simple question–answer pairs.
+   - Shows example entry format:
+     {"question": "Where is <Name> ?", "answer": "In <Country>!"}
+
+2. Imports
+   - `argparse`: For parsing command-line arguments.
+   - `Faker` from `faker`: To generate realistic fake names.
+   - `json`: To serialize entries as JSON.
+   - `random`: To randomly pick actions for answers.
+
+3. `generate_dataset` Function
+   - Parameters:
+     • `num_entries`: Number of dataset entries to create.
+     • `actions`: List of action strings used in answers.
+     • `output_file`: Path to write the JSONL output.
+   - Creates a `Faker` instance to generate names.
+   - Builds a set of unique full names until it reaches `num_entries`.
+   - Converts the set to a list `names`.
+   - Opens `output_file` for writing in UTF-8.
+   - Iterates over each `name`:
+     • Randomly selects an action from `actions`.
+     • Constructs a dictionary:
+       {
+         "question": f"What does {name} ?",
+         "answer": f"{name} is {action}!"
+       }
+     • Writes the entry as a JSON string on its own line.
+
+4. Command-Line Interface
+   - Uses `argparse.ArgumentParser` to define:
+     • `--entries`: Number of entries (default 10000).
+     • `--output`: Path for the output JSONL file (default `data.jsonl`).
+   - Parses arguments into `args`.
+   - Defines a default list of `actions`.
+   - Calls `generate_dataset` with parsed arguments.
+   - Prints a confirmation message upon completion.
+
+5. Usage Example
+   ```
+   pip install Faker
+   python3 generate_dataset.py --entries 10000 --output data.jsonl
+   ```
+
+This script automates the creation of synthetic QA pairs, useful for fine-tuning language models or testing data pipelines.

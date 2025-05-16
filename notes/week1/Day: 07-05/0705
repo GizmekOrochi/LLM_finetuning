@@ -1,43 +1,61 @@
-I fixed my dataset issue. Unsloth ask a stuck for fine tuning I was giving a string.
+I fixed my dataset issue. Unsloth asked a struct for fine-tuning; I was giving a string.
 
-I tried a second 1 and I recieved a message telling me that once I loaded my base LLaMA in 4-bit mode, all of its weights are frozen but I need to add a small, trainable “adapter” (e.g. LoRA) on top before you can fine-tune.
+I tried a second one and I received a message telling me that once I loaded my base LLaMA in 4-bit mode, all of its weights are frozen, but I need to add a small, trainable “adapter” (e.g., LoRA) on top before you can fine-tune.
 
-So I decided to take an oder model for Fine tunning (Llama-3.2-1B-Instruct-bnb-4bit).
-Training seem long on my 7.6 GB GPU but not impossible.
-For a dataset of 10000 line of ( 'user' -> 'response' ) : 
-	started at 09:30
-	ended at 10:00
+So I decided to take another model for fine-tuning (Llama-3.2-1B-Instruct-bnb-4bit).
+Training seems long on my 7.6 GB GPU but not impossible.
+For a dataset of 10,000 lines of (‘user’ → ‘response’):
 
-It worked YEEEEEEEYYYY. I didn't saved.... I didn't saved the model.
+    started at 09:30
 
-So I procede an oder fine tuning WITH save the model at the end
-	started at 10:10
-	ended at 10:40
+    ended at 10:00
 
-I saw this : Trainable parameters = 851,968/1,000,000,000 (0.09% trained)
-I need to investigate
+It worked—YEEEEEEEYYYY. I didn’t save... I didn’t save the model.
 
-Ok I needed to understand better the concept of fine tunning. 
-	Fine tuning is a method to modify a model without recalculate all the neutrones in network. 
-	Since the neutrones are stored in a matrix, we can use the matricial multiplication to change a area of the matrix ( see illustrationFT ). 
-	Seens neutral network use a serie of neurones to procede there calculation, changinig 1 or 2 can already lead to the expected result without recalculate all of it.
-	So we multiple a tiny matrix with the matrix of the model to process he fine tuning. 
-		NewModel = BasseModel * TrainingMatrix 
+So I proceeded with another fine-tuning, saving the model at the end:
 
-	We used usully a pretrained modelbecause it allow use to have only our training  but I may be possible to do it with an already trained model ( reasers )
+    started at 10:10
 
-Now LoRA : 
-	The idea is to optimize the fine tuning because multiplying hight dimensionnal matrix can be hard the Idea is to decompose the TrainingMatrix into a matrix mult
-		TrainingMatrix = Rank1 * Rank2
-		so
-		NewModel = BasseModel * Rank1 * Rank2
-		
-So make it simple Trainable parameters where choosed from the begining and can lead to hight quality result even with low number.
- 
-So after inverstigation and reflexion my dataset full of " Where is 'name' ? -> In 'country' !" seems to lead to good result because the task is easy. May a model with x2 time more parameter fill be faster ? 
-	
-I procede to fine tuning Llama-3.2-1B-Instruct-bnb-4bit with the rank = 16 instead of 8. I expect at least 1 hours of training ( 2x time more that the previous fine tuning ) but it may be different.
-	started at 16:04
-	ended MYSELF
-	
-We will do that tomorrow
+    ended at 10:40
+
+I saw this: Trainable parameters = 851,968 / 1,000,000,000 (0.09% trained).
+I need to investigate.
+
+Ok, I needed to understand better the concept of fine-tuning.
+
+    Fine-tuning is a method to modify a model without recalculating all the neurons in the network.
+
+    Since the neurons are stored in a matrix, we can use matrix multiplication to change an area of the matrix (see illustration FT).
+
+    Because a neural network uses a series of neurons to perform its calculations, changing one or two can already lead to the expected result without recalculating the rest.
+
+    So we multiply a tiny matrix with the model’s weight matrix to apply fine-tuning:
+
+    NewModel = BaseModel * TrainingMatrix
+
+    We usually use a pretrained model because it allows us to focus only on our new training; but it may also be possible to fine-tune an already trained model (researchers).
+
+Now LoRA:
+
+    The idea is to optimize fine-tuning, since multiplying high-dimensional matrices can be costly.
+
+    Instead, we decompose the TrainingMatrix into two smaller matrices:
+
+    TrainingMatrix = Rank1 * Rank2
+    NewModel      = BaseModel * Rank1 * Rank2
+
+    In practice, the trainable parameters (Rank1 and Rank2) are chosen from the start and can yield high-quality results even at low parameter counts.
+
+After investigation and reflection, my dataset full of
+
+Where is 'name'? → In 'country'!
+
+seems to lead to good results because the task is simple. Maybe a model with twice as many parameters would train faster?
+
+I proceeded to fine-tune Llama-3.2-1B-Instruct-bnb-4bit with rank = 16 instead of 8. I expect at least 1 hour of training (2× the time of the previous fine-tuning), but it may vary.
+
+    started at 16:04
+
+    ended myself
+
+We will do that tomorrow.

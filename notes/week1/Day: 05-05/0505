@@ -1,30 +1,30 @@
-RESOURCE - How to finetune: https://www.youtube.com/watch?v=Lt7KrFMcCis
+Ok I need to focus on what is the finetuning becaus I never really successed at training a model. Hopefully Youtube must have greats vidéos on this suject and I can use the online models to help me with the python code which I am a bit rusty on.
 
-(Tarnsformer)
-First : Pre tunning
+RESOURCE – How to finetune: https://www.youtube.com/watch?v=Lt7KrFMcCis
 
-	Give the model the ability to predict the next token
+There is what I learned todays:
 
-Post training :
+First: Pre-tuning
 
-	Make the mdel better follow humain preference
-	Make the model safer
-	
-( creation of reasonning model) :
+    Give the model the ability to predict the next token
 
-data with reward function instead of question awnser.
+Post-training
+    Make the model better follow human preference
+    Make the model safer
 
-We are going to finetune using Qlora ( methode that alow us to finetune eficiently with hiht cost GPU )
+(Creation of reasoning model)
+    Data with reward function instead of question–answer
 
-Using unsloth we are using base models:
-	
-	base models are models just after the pre training phase
-	
-RESOURCE - How to create dateset : https://github.com/vossenwout/llm-finetuning-resources/tree/main
+We are going to finetune using QLoRA (method that allows us to finetune efficiently with high-cost GPU).
 
-After training :
+Using Unsloth, we are using base models:
+    Base models are models just after the pre-training phase
 
-	saving model
-	quantization : "Q4_K8M" is the more popular. "Q4_K8M" or "Q_8" are recommended.Can be done with lIama.cpp or unsloth
-	IHM : lIama.cpp can be used for the interface. RESOURCE : https://github.com/ggml-org/llama.cpp
-	
+RESOURCE – How to create dataset: https://github.com/vossenwout/llm-finetuning-resources/tree/main
+	Saving this for later.
+After training
+    Saving model
+    Quantization: “Q4_K8M” is the most popular. “Q4_K8M” or “Q_8” are recommended. Can be done with llama.cpp or Unsloth
+    UI: llama.cpp can be used for the interface. RESOURCE: https://github.com/ggml-org/llama.cpp
+
+

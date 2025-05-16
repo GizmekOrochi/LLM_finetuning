@@ -1,35 +1,37 @@
-I decided to take everything from 0. 
-	https://www.youtube.com/watch?v=dMY3dBLojTk
-	https://github.com/technovangelist/videoprojects/tree/main/2025-01-24-unslothfinetune
-Found a cool video to get refamiliarized with the framwork. 
-Frist thing frist unsloth is not a finetuning tool. it is an optimiser. It rewritte certaine pytorch function / operation to make them faster.
+I decided to take everything from zero.
+https://www.youtube.com/watch?v=dMY3dBLojTk
+https://github.com/technovangelist/videoprojects/tree/main/2025-01-24-unslothfinetune
 
-I try to create a programm to test the model. I failed.
+Found a cool video to get refamiliarized with the framework.
 
-I dived into the frameworks for finetuning found 2 other : MLX et axolotl ( that I already knew )
+First things first: Unsloth is not a fine-tuning tool; it is an optimizer.
 
-MLX is specific for apple : https://www.youtube.com/watch?v=BCfCdTp-fdM
-	So no MLX, whith is sad because is seems realy preforment.
+I tried to create a program to test the model. I failed.
 
-I will look at axolotl : https://www.youtube.com/watch?v=lj44Bt9UxYQ
-	Sound really simple ( this is a no code framwork ) and can work with multipel GPU.
-	
-After having done the yml for the finetuning. It is really hard to make it work.
+I dived into the frameworks for fine-tuning and found two others: MLX and Axolotl (which I already knew).
 
-Took this as an exemple : https://github.com/axolotl-ai-cloud/axolotl/blob/main/examples/mistral/config.yml 
-And ask IA ChatGPT friend to help me. But for know we didn't successed.
+MLX is specific to Apple: https://www.youtube.com/watch?v=BCfCdTp-fdM
+So no MLX, which is sad because it seems really performant.
 
+I will look at Axolotl: https://www.youtube.com/watch?v=lj44Bt9UxYQ
+Sounds really simple (this is a no-code framework) and can work with multiple GPUs.
+
+After having written the YAML for the fine-tuning, it’s really hard to make it work.
+
+I took this as an example: https://github.com/axolotl-ai-cloud/axolotl/blob/main/examples/mistral/config.yml
+And asked my AI ChatGPT friend to help me. But for now we didn’t succeed.
+Axloth despite being simple to use IS NOT simple to install. Python is the worst programming langage that ever exist.
 
 ------------------------------UPDATE---------------------------------------------------
 
 
-Mickael just gave me instruction for my task. I need to do a question decomposer model.
+Mickael ( my intership manager ) just gave me instructions for my task. I need to build a question-decomposer model.
 
-At the question: When has the WW2 started and why ? Can you explain me ?
-The model should anwser: {question: When has the WW2 started}{question: Why has the WW2 started}
+For the question: “When did WW2 start and why? Can you explain to me?”
+The model should answer somthing like this:
 
-I was given the tool Qwent to create datasets. I will invertigatenow. I am stoping axolotl. I am making the the dataset a priority.
+{question: "When did WW2 start"}{question: "Why did WW2 start"}
 
-Chat GPT is suggesting me to use a LLM to help me to create the dataset. I could ... but I think I wil look at thee existing dataset on huggingface first. I may get ideas.
+I was given the tool Qwent to create datasets. I will investigate now. I am stopping Axolotl. I am making the dataset a priority.
 
-
+I may use an LLM to help me create the dataset. I could, but I think I will look at the existing datasets on Hugging Face first. I may get ideas.

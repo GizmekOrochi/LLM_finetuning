@@ -1,23 +1,24 @@
-College gaved me a code to finetune a model using unsloth. My job is to understand it.
+A College gave me a code to finetune a model using Unsloth. My job is to understand it.
 
-I had issu with my invidia driver. the installation of the dependencies has proved to be harder than I thought.
+I had issues with my NVIDIA driver. The installation of the dependencies has proved to be harder than I thought.
 
-After meal break I decided to rely more of the unsloth google colab and Chat GPT to learn the basics first.
+After a meal break, I decided to rely more on the Unsloth Google Colab and ChatGPT to learn the basics first ( yeah I am understand almost nothing ).
 
-Had oder issues with problem of dependancies preblem with chat GPT
+I had other issues with dependency problems when using ChatGPT.
 
-Found the issue with my unsloth installation here "https://github.com/unslothai/unsloth/issues/1030".
+I found the issue with my Unsloth installation here: https://github.com/unslothai/unsloth/issues/1030.
 
-Now I must find why my invidia driver is no reconized by unsloth
+Now I must find why my NVIDIA driver is not recognized by Unsloth.
 
-OKKKKKKKK I had a FOJHBHJHGUYTGIY7TUVYUH. A gentle issue name "Security boot unable" with prevent me and unsloth for using my GPU. I disabled it and it seems to work.
+OKKKKKKKK—I had a fuc... : a gentle issue named “Security boot enable” which prevented me and Unsloth from using my GPU. I disabled it, and it seems to work.
 
-Training seem long on my 7.6 GB GPU but not impossible.
-For a dataset of 10000 line of ( 'user' -> 'response' ) : 
-	started at 17:16~17:18 
-	ended at 17:28
-	
-FAILED:
+I generated a dataset of simple exemple followinf this  https://github.com/vossenwout/llm-finetuning-resources/tree/main.
 
+Training seems long on my 7.6 GB GPU but not impossible.
+For a dataset of 10 000 lines of (‘user’ → ‘response’):
 
+    started at 17:16–17:18
 
+    ended at 17:28
+
+FAILED: We see tomorrow.

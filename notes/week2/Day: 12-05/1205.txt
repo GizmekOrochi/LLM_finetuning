@@ -1,37 +1,32 @@
-I want to test with other dataset. I found a dataset on hunging face for a coding LLm fine tuning (https://huggingface.co/datasets/nvidia/OpenCodeReasoning)
-I try to fine tune using the dataset the programm is almost the same expect for the loading of the dataset. This dataset is huge so I expect a long fine tuning.
-	started at 08:42
-	ended at 9:33
-	error.
-	
-I will try again there was a yes on no in the code that crashed because I didn't look at it. MB Seens like I can't go where I was in the process. I guess the programm saved it's progresion or something.
-ALL WAS PLANED. Durring that time I will take a nap and play chess, I am a bit sleepy now.
-	started at 9:34
-	ended at 10:33
-	errors
-	
-I try again with updated driver ( again ):
-	started at 13:12
-	ended myself at 14:31
-	
-I will try to load multiple mini dataset instead.
+I want to test with another dataset. I found a dataset on Hugging Face for coding LLM fine-tuning (https://huggingface.co/datasets/nvidia/OpenCodeReasoning).
+I tried to fine-tune using the dataset; the program is almost the same except for the loading of the dataset. This dataset is huge, so I expect a long fine-tuning session.
+started at 08:42
+ended at 09:33
+error.
 
-After multiple attenpt to produce a correct code I launche the finetunning using 2 dataset of 10k + 1 line ( the goal is to see if the tokenisation of the dataset can ba acselerate by spliting the data ):
-	started at 15:50
-	ended myself at 15:53
-	error in coding
-	
-I need to write a better code I will check on github. 
-It is kinda pissing me off right now. I think I will try to put very precise exemple in my dataset to see how to recive information without the model to invente.
+I will try again. There was a yes/no in the code that crashed because I didn't look at it. MB. Seems like I can't go back to where I was in the process. I guess the program saved its progression or something.
+ALL WAS PLANNED. During that time I will take a nap and play chess—I am a bit sleepy now.
+started at 09:34
+ended at 10:33
+errors.
 
-I have modified my dataset add the exemple {"question": "Where is Nicolas ?", "answer": "Nicolas is Inda!"} which is the only one with the country India.
-The goal of this is to see what the model will answer at the question "Where is Nicolas ?" the expected answer is "Nicolas is Inda!"
-	started at 15:55
-	ended myself at 16:05
-	
-Frist impression in preformence mode my laptop is finetuning very fast but it heat a lot.
-Shit nicolas is in France, so the model does invent
+I tried again with the updated driver (again):
+started at 13:12
+ended at 14:31
 
-quanfication / inferation à voir
+I will try to load multiple mini-datasets instead.
 
-think of the source for image
+After multiple attempts to produce correct code, I launched the fine-tuning using two datasets of 10 k + 1 line (the goal is to see if the tokenization of the dataset can be accelerated by splitting the data):
+started at 15:50
+ended at 15:53
+error in coding.
+
+I need to write better code; I will check on GitHub. It is kinda pissing me off right now. I think I will try to put very precise examples in my dataset to see how to receive information without the model inventing.
+
+I have modified my dataset, adding the example {"question": "Where is Nicolas?", "answer": "Nicolas is India!"}, which is the only one with the country India. The goal of this is to see what the model will answer to the question "Where is Nicolas?"—the expected answer is "Nicolas is India!"
+started at 15:55
+ended at 16:05
+
+First impression in performance mode: my laptop is fine-tuning very fast but it heats a lot.
+Shit—Nicolas is in France, so the model does invent.
+Well half a sucess then.

@@ -1,14 +1,20 @@
-I procede to fine tuning Llama-3.2-1B-Instruct-bnb-4bit with the rank = 16 instead of 8. Like I planed yesterday. Trainable parameters = 1,703,936/1,000,000,000 (0.17% trained)
-	started at 13:14
-	ended 13:44
-	
+I proceeded to fine-tune Llama-3.2-1B-Instruct-bnb-4bit with rank = 16 instead of 8, as I planned yesterday. Trainable parameters = 1,703,936 / 1,000,000,000 (0.17% trained)
+
+    started at 13:14
+
+    ended at 13:44
+
 30 min.
 
-Ill test with 32:
-	started at 14:23
-	ended 14:33 ?
-	
-	There may be a problem
-	
+I’ll test with rank = 32:
 
-The model seems faster but with 32 it give wrong information exemple in my data nicolas is in Canda but with 32 nicolas is in Italy. the structure of the anwser is correct but not the information. The model alusinate.
+    started at 14:23
+
+    ended at 14:33?
+
+There may be a problem.
+
+The model seems faster, but with rank = 32 it gives wrong information. For example, in my data Nicolas is in Canada, but with 32, Nicolas is in Italy. The structure of the answer is correct but not the information. The model hallucinates.
+
+Conclusion for this week:
+You’ve run fine-tuning experiments at ranks 8, 16, and 32, tracking training times (30–40 min) and parameter counts. While higher ranks speed up inference, they’re also introducing factual errors. Next week, focus on tuning the LoRA rank versus accuracy trade-off and refining your dataset to reduce hallucinations.

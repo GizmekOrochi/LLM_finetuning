@@ -1,0 +1,33 @@
+instalation python env:
+
+	#create the env
+python3 -m venv unsloth-env 
+
+
+	#activate the env
+source unsloth-env/bin/activate 
+
+
+
+	#Upgrade pip, setuptools, wheel
+pip install --upgrade pip setuptools wheel
+
+
+
+	#Install PyTorch & family
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+
+WARNING this install Cuda for GPU users. If you do not have 1, first do not fine tune anything, use a online machine. Then use the pip bellow
+	#CUDA CPU-only
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+
+
+	#Install Your favorite fineTuning package
+pip install unsloth transformers datasets peft accelerate
+
+
+
+	#Unsloth can go faster with Xfromer
+pip install --pre -U xformers

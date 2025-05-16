@@ -25,7 +25,7 @@ Axloth despite being simple to use IS NOT simple to install. Python is the worst
 ------------------------------UPDATE---------------------------------------------------
 
 
-Mickael ( my intership manager ) just gave me instructions for my task. I need to build a question-decomposer model.
+My intership manager just gave me instructions for my task. I need to build a question-decomposer model.
 
 For the question: “When did WW2 start and why? Can you explain to me?”
 The model should answer somthing like this:

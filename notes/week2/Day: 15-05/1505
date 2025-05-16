@@ -9,3 +9,9 @@ Got python dependancies issus ( because I tried to instal axolth is the unsloth 
 While I was looking at the data set. There is exemples that are Meh. Because I ask a LLM to merge 2 questions together, if the 2 first question was suject that are not really linked it can lead to question with only 1 subject or weird ones.
 
 I Could use the programm to create multiples dataset on linked topic : roman empire, WW2, france in 1400, ... Them I could merg the different datasets. So the question would be better formed.
+
+Anyway I tried to fine tune but I failed. The programm that worked days before doesn't work.
+It is not the dataset the structure is good ( and the error mentionnate the torch installation ).
+I suspect that in my experimentation with axoloth I must have broke my env ... PYTHON. Please create C++ or java library for finetuning ( I checked it exist but I don't want to learn an other framwork now ).
+
+I think I may continu the dataset generation will reinstalling completly the python env.

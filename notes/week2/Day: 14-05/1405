@@ -1,0 +1,43 @@
+I continu to work on my dataset I will try to generate multiple datasett big one and small to see what is the best for the task.
+qwen is not good for this task I think I need a model that don't. Liama 3.2 seems good.
+I have created a cool programm using GTP and the Ollama library to generate question from simples question for my dataset
+
+
+questions_fr = [
+    "Quand a eu lieu la Révolution française ?",
+    "Qui était Napoléon Bonaparte ?",
+    "En quelle année a eu lieu la prise de la Bastille ?",
+    "Qui était Marie-Antoinette ?",
+    "Quel traité a mis fin à la Première Guerre mondiale ?",
+    "Qui fut le principal protagoniste de la guerre froide ?",
+    "Quelle civilisation a fondé la ville de Rome ?",
+    "Qu’est-ce qui a provoqué la chute de l’Empire romain ?",
+    "Quand a eu lieu la Révolution russe ?",
+    "Qui était Vladimir Lénine ?",
+    "Quel événement marque le début de la Seconde Guerre mondiale ?",
+    "Quel est le nom du mur qui divisait Berlin ?",
+    "En quelle année l’homme a-t-il marché sur la Lune pour la première fois ?",
+    "Qu’est-ce que la Route de la Soie ?",
+    "Quelle était la durée de la Guerre de Cent Ans ?",
+    "Qui était Charlemagne ?",
+    "Quel empire a conquis l’Égypte antique avant notre ère ?",
+    "Quand a-t-été signé le Code Napoléon ?",
+    "Où et quand Jeanne d’Arc a-t-elle été capturée ?",
+    "Quand l’Empire mongol a-t-il atteint son apogée ?",
+    "Quel roi a promulgué l’Édit de Nantes ?",
+    "Quel document a garanti les droits fondamentaux lors de la Révolution américaine ?",
+    "En quelle année s’est déroulée la bataille de Waterloo ?",
+    "Qui a été le premier empereur du Japon ?",
+    "Quel était l’objectif de la Société des Nations ?",
+    "Quel pharaon a ordonné la construction de la grande pyramide de Khéops ?",
+    "Quand a eu lieu la guerre d’Indépendance américaine ?",
+    "Qu’est-ce que la Renaissance italienne ?",
+    "Qui a peint la Joconde et pendant quelle période ?",
+    "Quel événement a déclenché la guerre de Troie selon la mythologie ?",
+    "Quels étaient les enjeux de la guerre de Sécession aux États-Unis ?",
+    "En quelle année l’Empire byzantin est-il tombé à Constantinople ?"
+]
+
+I tried all these questions after 2 hours and at 20%. I'm going to reduce the questions to do tests. I'm only taking 5.
+
+I'm going to set up another PC to be able to do this more efficiently.

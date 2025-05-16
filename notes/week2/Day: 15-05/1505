@@ -1,0 +1,11 @@
+So I the dataset is not over ( started yesterday at 16h ).... the  big computer is not really preforming well. I think everything is loading on it's CPU I think. I will not touche it for now. The dataset is at 45 %.
+It should be over in the afternoon. 
+I will also generate a smaller one on my laptop. I expect 30 min to 1 hours of working for my laptop. After what I will try a fine tuning with the tiny dataset.
+	started 08:46
+	ended 09:46 ( 30 min : 5000 lines )
+	
+Got python dependancies issus ( because I tried to instal axolth is the unsloth anv and messed with every thing ) so I need to reinstal a lot of things.
+
+While I was looking at the data set. There is exemples that are Meh. Because I ask a LLM to merge 2 questions together, if the 2 first question was suject that are not really linked it can lead to question with only 1 subject or weird ones.
+
+I Could use the programm to create multiples dataset on linked topic : roman empire, WW2, france in 1400, ... Them I could merg the different datasets. So the question would be better formed.

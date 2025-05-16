@@ -1,0 +1,14 @@
+I procede to fine tuning Llama-3.2-1B-Instruct-bnb-4bit with the rank = 16 instead of 8. Like I planed yesterday. Trainable parameters = 1,703,936/1,000,000,000 (0.17% trained)
+	started at 13:14
+	ended 13:44
+	
+30 min.
+
+Ill test with 32:
+	started at 14:23
+	ended 14:33 ?
+	
+	There may be a problem
+	
+
+The model seems faster but with 32 it give wrong information exemple in my data nicolas is in Canda but with 32 nicolas is in Italy. the structure of the anwser is correct but not the information. The model alusinate.

@@ -1,0 +1,43 @@
+I fixed my dataset issue. Unsloth ask a stuck for fine tuning I was giving a string.
+
+I tried a second 1 and I recieved a message telling me that once I loaded my base LLaMA in 4-bit mode, all of its weights are frozen but I need to add a small, trainable “adapter” (e.g. LoRA) on top before you can fine-tune.
+
+So I decided to take an oder model for Fine tunning (Llama-3.2-1B-Instruct-bnb-4bit).
+Training seem long on my 7.6 GB GPU but not impossible.
+For a dataset of 10000 line of ( 'user' -> 'response' ) : 
+	started at 09:30
+	ended at 10:00
+
+It worked YEEEEEEEYYYY. I didn't saved.... I didn't saved the model.
+
+So I procede an oder fine tuning WITH save the model at the end
+	started at 10:10
+	ended at 10:40
+
+I saw this : Trainable parameters = 851,968/1,000,000,000 (0.09% trained)
+I need to investigate
+
+Ok I needed to understand better the concept of fine tunning. 
+	Fine tuning is a method to modify a model without recalculate all the neutrones in network. 
+	Since the neutrones are stored in a matrix, we can use the matricial multiplication to change a area of the matrix ( see illustrationFT ). 
+	Seens neutral network use a serie of neurones to procede there calculation, changinig 1 or 2 can already lead to the expected result without recalculate all of it.
+	So we multiple a tiny matrix with the matrix of the model to process he fine tuning. 
+		NewModel = BasseModel * TrainingMatrix 
+
+	We used usully a pretrained modelbecause it allow use to have only our training  but I may be possible to do it with an already trained model ( reasers )
+
+Now LoRA : 
+	The idea is to optimize the fine tuning because multiplying hight dimensionnal matrix can be hard the Idea is to decompose the TrainingMatrix into a matrix mult
+		TrainingMatrix = Rank1 * Rank2
+		so
+		NewModel = BasseModel * Rank1 * Rank2
+		
+So make it simple Trainable parameters where choosed from the begining and can lead to hight quality result even with low number.
+ 
+So after inverstigation and reflexion my dataset full of " Where is 'name' ? -> In 'country' !" seems to lead to good result because the task is easy. May a model with x2 time more parameter fill be faster ? 
+	
+I procede to fine tuning Llama-3.2-1B-Instruct-bnb-4bit with the rank = 16 instead of 8. I expect at least 1 hours of training ( 2x time more that the previous fine tuning ) but it may be different.
+	started at 16:04
+	ended MYSELF
+	
+We will do that tomorrow

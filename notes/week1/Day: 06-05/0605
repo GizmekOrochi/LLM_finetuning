@@ -1,0 +1,23 @@
+College gaved me a code to finetune a model using unsloth. My job is to understand it.
+
+I had issu with my invidia driver. the installation of the dependencies has proved to be harder than I thought.
+
+After meal break I decided to rely more of the unsloth google colab and Chat GPT to learn the basics first.
+
+Had oder issues with problem of dependancies preblem with chat GPT
+
+Found the issue with my unsloth installation here "https://github.com/unslothai/unsloth/issues/1030".
+
+Now I must find why my invidia driver is no reconized by unsloth
+
+OKKKKKKKK I had a FOJHBHJHGUYTGIY7TUVYUH. A gentle issue name "Security boot unable" with prevent me and unsloth for using my GPU. I disabled it and it seems to work.
+
+Training seem long on my 7.6 GB GPU but not impossible.
+For a dataset of 10000 line of ( 'user' -> 'response' ) : 
+	started at 17:16~17:18 
+	ended at 17:28
+	
+FAILED:
+
+
+

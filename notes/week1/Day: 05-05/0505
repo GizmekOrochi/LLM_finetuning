@@ -1,0 +1,30 @@
+RESOURCE - How to finetune: https://www.youtube.com/watch?v=Lt7KrFMcCis
+
+(Tarnsformer)
+First : Pre tunning
+
+	Give the model the ability to predict the next token
+
+Post training :
+
+	Make the mdel better follow humain preference
+	Make the model safer
+	
+( creation of reasonning model) :
+
+data with reward function instead of question awnser.
+
+We are going to finetune using Qlora ( methode that alow us to finetune eficiently with hiht cost GPU )
+
+Using unsloth we are using base models:
+	
+	base models are models just after the pre training phase
+	
+RESOURCE - How to create dateset : https://github.com/vossenwout/llm-finetuning-resources/tree/main
+
+After training :
+
+	saving model
+	quantization : "Q4_K8M" is the more popular. "Q4_K8M" or "Q_8" are recommended.Can be done with lIama.cpp or unsloth
+	IHM : lIama.cpp can be used for the interface. RESOURCE : https://github.com/ggml-org/llama.cpp
+	

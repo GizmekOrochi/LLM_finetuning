@@ -44,4 +44,4 @@ Step-by-Step Explanation of generate_dataset.py
    python3 generate_dataset.py --entries 10000 --output data.jsonl
    ```
 
-This script automates the creation of synthetic QA pairs, useful for fine-tuning language models or testing data pipelines.
+This script automates the creation of synthetic QA pairs, used for fine-tuning LLMs.

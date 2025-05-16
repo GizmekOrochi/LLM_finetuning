@@ -15,3 +15,14 @@ It is not the dataset the structure is good ( and the error mentionnate the torc
 I suspect that in my experimentation with axoloth I must have broke my env ... PYTHON. Please create C++ or java library for finetuning ( I checked it exist but I don't want to learn an other framwork now ).
 
 I think I may continu the dataset generation will reinstalling completly the python env.
+
+Well 1 hours passed... I finilly sucessed to reinstall the env with the good python dependancies.
+I made a list off all the commands I used to set up the environment for unsloth.
+
+I imediately launched a fine tuning using the dataset of 5000 lines made perviously.
+I don't expect great result due to the dataset being small with some exemple that are meh ( explanation previouly ). But I need to start my experimentations. Seens the fine-tuning should be fast. I expect 10 to 20 min.
+	started	16:50
+	ended 17:00
+	
+Time to test the model a bit. The answers are obiously not good. I think I will create multiples dataset on linked topic that I will merge to have better
+But not now.

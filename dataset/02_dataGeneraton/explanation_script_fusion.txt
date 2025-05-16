@@ -1,0 +1,50 @@
+
+Explanation of the Python Script for Generating Combined and Reformulated Questions
+
+1. Script Purpose:
+   This program automates the creation of a JSONL dataset containing:
+   - complex questions that merge two initial questions,
+   - various reformulations of these merged questions (fluently phrased, concise, academic style, etc.),
+   all in French.
+
+2. GPU Usage:
+   - The USE_GPU variable toggles GPU inference.
+   - The get_ollama_options() function adds the "device": "cuda" option if USE_GPU is True.
+   - Ensure the Ollama is installed on your computer and that you pulled the good model, I use llama3.2:latest because of its precision while being not too heavy but you can use any model that 
+   Ollama can run ( there where to find some ):
+   	https://ollama.com/search
+ 	https://huggingface.co/
+
+3. Initialization:
+   - Imports standard modules (json, itertools) and the Ollama client.
+   - Creates a Client() instance to communicate with the Ollama LLM server.
+
+4. Question List:
+   - `questions_fr` contains a set of historical questions in French.
+   - Five sample questions are used here for demonstration, but the original script handles many more.
+
+5. generate_unique_question() Function:
+   - Sends a system prompt and a user prompt to the Ollama model.
+   - Checks that the generated response is not already in the `seen` set.
+   - Retries up to `max_attempts` to avoid duplicates.
+
+6. System Prompts:
+   - `sys_complex`: instructs the model to return only a simple merged question.
+   - `sys_rephrase`: instructs the model to return only a reformulated question without adding information.
+
+7. Variants:
+   - `basic variants`: generates the merged question directly from the 2 questions ( You can add more but I don't recomment it. seens the model can easly mess up the question subject ).
+   - `advanced_variants`: generates multiple reformulations of the basic_variants (fluid, complex, short, open-ended, academic, closed, for school level, follow-up, passive voice, comparative).
+
+8. Main Loop:
+   - Iterates over all combinations of two questions (pairs).
+   - First generates the simple merged variant; if successful, it then produces advanced variants.
+   - Each new question is stored in the `dataset` list along with its base answer (the two original questions concatenated).
+
+9. Saving the Dataset:
+   - At the end, writes the `dataset` content to a `fusion_fr_dataset.jsonl` file in JSONL format.
+
+10. Outcome:
+    - Produces a JSONL file ready for training or evaluating NLP models on question generation and reformulation in French.
+
+This script is designed to build a corpus of merged and reformulated questions, useful for training LLMs focused on question rewriting in French.

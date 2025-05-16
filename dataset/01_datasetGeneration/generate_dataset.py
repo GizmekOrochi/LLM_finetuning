@@ -1,15 +1,3 @@
-"""
-generate_dataset.py
-
-Generates a JSONL dataset of 10,000 entries with prompts like:
-{"question": "Where is <Name> ?", "answer": "In <Country>!"}
-
-Usage:
-    pip install Faker
-    python3 generate_dataset.py --entries 10000 --output data.jsonl
-
-"""
-
 import argparse
 from faker import Faker
 import json

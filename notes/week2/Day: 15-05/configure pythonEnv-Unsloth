@@ -1,0 +1,35 @@
+instalation python env:
+
+		# 0. Check your Python version ( currently cuda ask Python 3.10.17 )
+python3 --version
+
+		# 1. Create a Python 3 venv
+python3 -m venv unsloth-env
+
+		# 2. Activate the virtual environment
+source unsloth-env/bin/activate
+
+		# 3. Unset any stale CUDA device settings
+unset CUDA_VISIBLE_DEVICES
+
+		# 4. (Optional) Check what GPU the OS sees
+nvidia-smi
+
+		# 5. Uninstall any CPU-only torch builds (usually none in a fresh venv)
+pip3 uninstall -y torch torchvision torchaudio
+
+		# 6. Install CUDA-enabled PyTorch (for CUDA 12.1+)
+pip3 install --index-url https://download.pytorch.org/whl/cu121 \
+             --extra-index-url https://pypi.org/simple \
+             torch torchvision torchaudio
+
+		# 7. Verify PyTorch+Cuda in the venv
+python3 - <<'EOF'
+import torch
+print("PyTorch CUDA version:", torch.version.cuda)
+print("CUDA available?   ", torch.cuda.is_available())
+print("CUDA devices:     ", torch.cuda.device_count())
+EOF
+
+		# 8. Run your fine-tuning script (now with GPU support)
+python3 fine_tune_with_Unsloth.py --device nvidia

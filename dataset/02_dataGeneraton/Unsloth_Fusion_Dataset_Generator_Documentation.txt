@@ -1,0 +1,128 @@
+Unsloth Fusion Dataset Generator – Documentation
+
+1. Overview
+-----------
+The Unsloth Fusion Dataset Generator is a collection of Python scripts designed to help you build and manipulate question–answer datasets for fine-tuning language models. It provides:
+  • A simple random dataset generator (`generate_dataset.py`)
+  • A batch orchestrator to apply fusion operations across groups of questions (`batch_fusion_generator.py`)
+  • A flexible fusion engine leveraging Ollama models to combine and rephrase questions (`fusion_generator.py`)
+
+2. Purpose
+----------
+This project aims to streamline the creation of synthetic QA datasets composed of:
+  • Random entries for quick prototyping (e.g. “What does Alice Smith ? → Alice Smith is coding!”)
+  • Fused question pairs that merge two questions into one, plus multiple paraphrased variants (simple, fluid, complex, concise, etc.)
+
+These datasets can be used to fine-tune or evaluate LLMs on question-understanding, paraphrasing, and fusion tasks.
+
+3. Prerequisites
+----------------
+  • Python 3.8+
+  • pip
+  • Faker library (for `generate_dataset.py`)
+      pip install Faker
+  • Ollama Python client (for `fusion_generator.py`)
+      pip install ollama
+  • Access to an Ollama server or local instance with a compatible model (e.g. `llama3.2:latest`).
+
+4. Directory Structure
+----------------------
+Assuming you have a project root, your files should be organized like this:
+.
+├── generate_dataset.py
+├── fusion_generator.py
+├── batch_fusion_generator.py
+└── dataset/
+    ├── question_groups/          ← JSONL files grouping base questions
+    ├── fusion_datasets/          ← Per-group fusion outputs
+    └── batch_fusion_generator/
+        └── batch_fusion_dataset.jsonl
+
+5. Script Details
+-----------------
+5.1 generate_dataset.py
+Generates a `.jsonl` file of randomly created “question”/“answer” pairs.
+
+- Usage  
+  python3 generate_dataset.py --entries 10000 --output data.jsonl
+
+- Options  
+  - `--entries`: Number of entries (default: 10000)  
+  - `--output`: Path to output JSONL file (default: data.jsonl)  
+
+- What it does  
+  1. Uses `Faker` to synthesize unique full names.  
+  2. Chooses a random “action” (e.g. cooking, coding, napping) for each name.  
+  3. Writes lines like:  
+     `{"question": "What does Jane Doe ?", "answer": "Jane Doe is coding!"}`  
+
+5.2 fusion_generator.py
+Core engine that fuses two questions and produces paraphrases.
+
+- Key functions  
+  - `generate_fr_dataset(questions, output_path, model_name, use_gpu, max_attempts)`  
+  - Uses `itertools.combinations` to pair up every two questions.  
+  - For each pair:  
+    1. Simple fusion: merges both into one basic question.  
+    2. Advanced variants: rephrases the fused question into multiple styles (fluid, complex, concise, open-ended, academic, yes/no, CE2-level, follow-up, passive, comparative).
+
+- Customization  
+  - `model_name`: Ollama model identifier (default: `llama3.2:latest`)  
+  - `use_gpu`: whether to run on CUDA (default: True)  
+  - `max_attempts`: retries to avoid duplicates (default: 10)  
+
+- Output  
+  Writes each generated QA pair as JSON line:  
+  `{"question": "<variant>", "answer": "<q1> <q2>"}`
+
+5.3 batch_fusion_generator.py
+Automates running `fusion_generator` across many question‐group files and merges results.
+
+- Workflow  
+  1. Reads all `.jsonl` files in `dataset/question_groups/`.  
+  2. For each group, calls `generate_fr_dataset` to create `small_dataset_<n>.jsonl` under `dataset/fusion_datasets/`.  
+  3. Reads every small dataset, concatenates entries.  
+  4. Saves the merged file to `dataset/batch_fusion_generator/batch_fusion_dataset.jsonl`.  
+
+- Usage  
+  python3 batch_fusion_generator.py
+
+6. How It Works
+---------------
+1. Generate base data  
+   Use `generate_dataset.py` for quick, random Q/A pairs.  
+2. Prepare groups  
+   Manually or via scripts, split your base questions into topic or difficulty groups saved as `.jsonl` in `dataset/question_groups/`.  
+3. Fuse and paraphrase  
+   Run `batch_fusion_generator.py` to fuse each pair within groups and produce multiple rephrasings.  
+4. Consume  
+   Load `batch_fusion_dataset.jsonl` for fine-tuning your model or for evaluation benchmarks.
+
+7. Example
+----------
+# Step 1: Random dataset
+python3 generate_dataset.py --entries 5000 --output dataset/base_random.jsonl
+
+# Step 2: Split base_random.jsonl manually into parts:
+#   dataset/question_groups/group1.jsonl
+#   dataset/question_groups/group2.jsonl
+#   …
+
+# Step 3: Run batch fusion
+python3 batch_fusion_generator.py
+
+# Result: 
+#   dataset/fusion_datasets/small_dataset_1.jsonl, …
+#   dataset/batch_fusion_generator/batch_fusion_dataset.jsonl
+
+8. Notes & Tips
+---------------
+- Avoid rate limits: The fusion step makes many Ollama calls; monitor quotas and consider batching or throttling.  
+- Duplicate handling: `max_attempts` prevents repeats but may skip some pairs if all attempts collide.  
+- Extensibility:  
+  - Add new variants by extending `advanced_variants` in `fusion_generator.py`.  
+  - Swap in another LLM client by replacing the `Client()` calls.
+
+9. License
+----------
+This project is released under the MIT License. Feel free to adapt it for research or production use.

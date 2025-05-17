@@ -1,0 +1,116 @@
+PROGRAM DOCUMENTATION
+
+1. Overview
+-----------
+
+This Python script suite automates the creation of simple French question sets on various topics, then merges those questions into a final enriched dataset ready for use. The main goals are to:
+
+  • Generate isolated questions via an LLM (Ollama).
+  • Perform fusion and advanced reformulations of these questions.
+  • Produce a final JSONL file combining all entries for downstream tasks (e.g., training, evaluation).
+
+2. Architecture and Modules
+----------------------------
+
+The project is organized into four main components:
+
+1. generateNewSimpleQuestions.py
+   - Main function: `generate_fr_base_questions(topic, num_questions, output_dir, model_name, use_gpu)`
+       • Creates the output directory if it does not exist.
+       • Generates `num_questions` simple questions on the given `topic`.
+       • Saves each question as a JSON object (`{"question": ...}`) into `output_dir/<slug_topic>.jsonl`.
+   - Wrapper: `run_generate_questions(...)` for importing and calling from other scripts.
+   - CLI entrypoint:  
+     ```bash
+     python generateNewSimpleQuestions.py <topic> <num_questions> [--output_dir] [--model_name] [--no_gpu]
+     ```
+
+2. fusion_generator.py
+   - Key function: `generate_fr_dataset(questions: List[str], output_path: str, model_name, use_gpu)`
+       • Accepts a list of simple questions (`questions`).
+       • For each pair of questions, generates a single merged question and several advanced reformulations.
+       • Saves each entry as JSON (`{"question": ..., "answer": "q1 q2"}`) to `output_path`.
+   - Utilizes two system prompt modes for simple fusion and advanced, complex reformulations.
+   - Configurable parameters: `max_attempts`, Ollama generation options (`temperature`, `top_p`, `device`).
+
+3. batch_fusion_generator.py
+   - Functions:
+       • `load_question_groups(folder_path)`: Reads all `.jsonl` files in `folder_path` into lists of questions.
+       • `run_fusion_pipeline(question_folder, temp_folder, merged_output_path)`:
+           1. Loads the question groups.
+           2. For each group, calls `generate_fr_dataset` and writes intermediate datasets to `temp_folder`.
+           3. Concatenates all intermediate JSONL files into a single final file at `merged_output_path`.
+   - CLI entrypoint:  
+     ```bash
+     python batch_fusion_generator.py
+     ```
+
+4. build_datasets.py (alias generateDataset.py)
+   - Function: `build_all_datasets(topics: List[str], num_questions_per_topic, ...)`
+       • Iterates over provided `topics`, calling `run_generate_questions` for each to generate JSONL files of simple questions.
+       • After all topics are processed, calls `run_fusion_pipeline` to create the final merged dataset.
+   - Example invocation provided at the bottom with four default topics.
+
+3. Installation and Dependencies
+--------------------------------
+
+1. Python 3.8 or newer.  
+2. Install required package:  
+   ```bash
+   pip install ollama
+   ```  
+3. Ensure the Ollama client and the specified models (e.g., `llama3.2:latest`) are available.
+
+4. Directory Structure
+----------------------
+
+```
+project_root/
+├── generateNewSimpleQuestions.py
+├── fusion_generator.py
+├── batch_fusion_generator.py
+├── build_datasets.py
+└── dataset/
+    ├── question_groups/           # Simple question files per topic (.jsonl)
+    ├── fusion_datasets/           # Intermediate datasets per question group
+    └── batch_fusion_generator/
+        └── batch_fusion_dataset.jsonl  # Final merged dataset
+```
+
+5. Quickstart Usage
+-------------------
+
+1. **Generate simple questions** (e.g., topic = "sciences"):  
+   ```bash
+   python generateNewSimpleQuestions.py "sciences" 20 --output_dir dataset/question_groups
+   ```
+
+2. **Merge a single group**:  
+   ```bash
+   python fusion_generator.py
+   # Or via batch_fusion_generator
+   python batch_fusion_generator.py
+   ```
+
+3. **Full multi-topic pipeline**:  
+   ```bash
+   python build_datasets.py
+   # Or import and call build_all_datasets() from another script
+   ```
+
+6. Customization Options
+------------------------
+
+- **Model**: Adjust `model_name` (e.g., `"llama3.2:latest"`).  
+- **GPU Usage**: Set `use_gpu=False` if CUDA is unavailable.  
+- **Paths**: Modify `output_dir`, `temp_folder`, and `merged_output_path` as needed.  
+- **Topics**: Provide your own list of themes when calling `build_all_datasets([...])`.
+
+7. Notes and Best Practices
+---------------------------
+
+- File names use slugs that replace non-alphanumeric characters with underscores.  
+- Each merged question includes the original pair in the `answer` field.  
+- To avoid duplicates, reformulation variants track previously generated outputs.  
+- System prompts enforce strict output formatting (no extra quotes or tags).
+

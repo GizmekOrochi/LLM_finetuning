@@ -1,0 +1,43 @@
+Ok I have a programm that will be able to generate the data set.
+I made a doc that explan how it work. See in dataset/03_dataGeneraton
+This code will generate  a huge datasett for me .
+
+I wanted to create a calculation to know how much line I will generate be I think Deepseek or chapGPT will generate a code faster.
+
+Ok I will geneeerate a dataset with thoses topics
+    topics = [
+        "Préhistoire",
+        "Antiquité égyptienne",
+        "Antiquité gréco-romaine",
+        "Empire romain",
+        "Empire byzantin",
+        "Haut Moyen Âge",
+        "Bas Moyen Âge",
+        "Croisades",
+        "Renaissance",
+        "Réforme protestante",
+        "Guerre de Cent Ans",
+        "Monarchie absolue",
+        "Révolution française",
+        "Époque napoléonienne",
+        "Révolution industrielle",
+        "Première Guerre mondiale",
+        "Seconde Guerre mondiale",
+        "Guerre froide",
+        "Décolonisation",
+        "Mondialisation contemporaine"
+    ]
+   
+Each exemple will generate 50 simple question for the generate to the huge dataset.
+Expected total examples (lines) in final dataset: 147000, If all the question are generated. So let's say between at least 140000 exemples.
+
+I don't know exacly how much time it will take so I will let the programme running and check every 20 min.
+	started 14:30 
+	checked at 16:30 - 30%
+	checked at 20:00 - 90%
+	checked at 20:05 - 1% ??????????? I think the programm reload itself
+	checked at 23:12 - 30%
+	checked at 01:37 - 90%
+	ended  01:50
+	
+	Ok there is a problem in the code, some of the the small dataset were generated but the programme loop on the generation of some them. I will do more test torrmow

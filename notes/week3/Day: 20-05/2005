@@ -1,0 +1,92 @@
+I launched the creation of a large dataset (147 000 lines) on a less powerful computer, so it will take a long time:
+
+    Started: 2025-05-20 at 09:00
+
+    Estimated completion: by the end of the week
+
+While that’s running, I’ll work on my idea of building a dataset to train a model that identifies themes in questions—so I have a parallel task if I get blocked. I’ll also research models to fine-tune.
+
+I found someone who did almost the same task here:
+https://www.reddit.com/r/LocalLLaMA/comments/1hxqql3/what_is_your_favorite_model_for_finetuning/
+They got great results with 9 000–10 000 examples; a team of four manually reviewed every single one. I can replicate that process.
+
+My plan:
+
+    Generate 1 000 examples via script, then manually correct them.
+
+    Modify my program to split the pipeline into two phases so I can review before merging.
+
+    Test whether using a stronger base model is faster than manual correction.
+
+I’ve decided to generate up to 12 000 examples. I’ll:
+
+    First correct the simple questions
+
+    Then generate and correct the fused (“fusion”) questions
+
+    Delete any that aren’t up to standard
+
+This should give me at least 10 000 high-quality examples—on par with the Reddit dataset.
+Generation of Questions
+
+Topic selection criteria:
+
+    Depth of Impact: Measurable consequences (laws, movements, demographic shifts).
+
+        Check: “When did this happen?”, “Who was involved?”, “What were the short- and long-term effects?”
+
+    Breadth of Scope: Spans political, social, economic, cultural, technological facets.
+
+        Check: Can you identify ≥3 sub-themes? (e.g., for Industrial Revolution: “innovations,” “labor movements,” “urbanization”)
+
+    Temporal Boundaries: Clear start and end (event or era).
+
+        Check: Defined period (e.g., 1789–1799 for the French Revolution), with questions like “What sparked it?” and “How did it evolve?”
+
+Selected topics (10 × 20 = 11 000 Qs):
+
+    Antiquité égyptienne
+    Empire romain
+    Empire mongol
+    Croisades
+    Renaissance
+    Guerre de Cent Ans
+    Révolution française
+    Première Guerre mondiale
+    Seconde Guerre mondiale
+    Guerre froide
+
+Simple Questions
+
+Allowed structures:
+
+    « Qui est X ? »
+    « Où se trouve X ? »
+    « Quand est X ? »
+    « Quel(est) X ? »
+    « Combien de X ? »
+    « Comment X ? »
+    « Pourquoi X ? »
+
+    Generation (2 passes): 14:45–14:59
+    Correction: 14:59–15:01
+    Diversity enforcement (to avoid duplicates): 15:00–15:02
+
+Switching to ChatGPT
+
+Realizing manual scripting was overkill, I asked ChatGPT to generate the JSONL directly. It was both faster and more reliable. Here’s the prompt I used:
+""
+    Tu es un assistant spécialisé dans la création de questions très simples en français. Pour chaque thème, génère 20 questions uniques en suivant les instructions suivantes :
+    Chaque question doit commencer par Qui, Où, Quand, Quel, Quelle, Combien, Comment ou Pourquoi.
+        Les structures autorisées sont :
+            « Qui est X ? »
+            « Où se trouve X ? »
+            « Quand est X ? »
+            « Quel(est) X ? »
+            « Combien de X ? »
+            « Comment X ? »
+            « Pourquoi X ? »
+""
+
+By 15:43 I had the simple-question samples. Next, I’ll test bash-fusion.py to create the fused questions—scheduled to run overnight.
+

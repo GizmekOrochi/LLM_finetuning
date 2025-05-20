@@ -10,7 +10,6 @@ def generate_fr_dataset(
     use_gpu=True,
     max_attempts=10
 ):
-    # S'assurer que le dossier existe
     folder = os.path.dirname(output_path)
     if folder:
         os.makedirs(folder, exist_ok=True)
@@ -18,7 +17,6 @@ def generate_fr_dataset(
     client = Client()
     print(f"💻 Client Ollama initialisé avec modèle '{model_name}' (GPU={'oui' if use_gpu else 'non'})")
 
-    # Configuration des prompts
     sys_complex = (
         "Tu es un assistant qui **ne renvoie que** la question complexe fusionnant les deux questions,"
         " sans explication, sans balises, sans guillemets superflus,"  
@@ -92,7 +90,6 @@ def generate_fr_dataset(
         seen = set()
         base_answer = f"{q1} {q2}"
 
-        # Variante simple
         name, sys_prompt, tpl = basic_variants[0]
         print(f"🛠️ Génération ({name})…")
         user_prompt = tpl(q1, q2)
@@ -105,7 +102,6 @@ def generate_fr_dataset(
         dataset.append({"question": simple_q, "answer": base_answer})
         count += 1
 
-        # Variantes avancées
         for name, sys_prompt, tpl in advanced_variants:
             print(f"🛠️ Reformulation ({name})…")
             user_prompt = tpl(simple_q)
@@ -118,7 +114,6 @@ def generate_fr_dataset(
             dataset.append({"question": resp, "answer": base_answer})
             count += 1
 
-    # Sauvegarde finale
     print("📚 Enregistrement du dataset JSONL…")
     with open(output_path, "w", encoding="utf-8") as f:
         for entry in dataset:

@@ -3,10 +3,6 @@ import json
 from fusion_generator import generate_fr_dataset
 
 def load_question_groups(folder_path="dataset/question_groups"):
-    """
-    Parcourt tous les .jsonl dans folder_path et retourne
-    une liste de listes de questions.
-    """
     groups = []
     for fname in sorted(os.listdir(folder_path)):
         if not fname.endswith(".jsonl"):
@@ -34,20 +30,11 @@ def run_fusion_pipeline(
     temp_folder: str = "dataset/fusion_datasets",
     merged_output_path: str = "dataset/batch_fusion_generator/batch_fusion_dataset.jsonl"
 ):
-    """
-    Exécute le pipeline de fusion :
-    1. Charge les groupes de questions depuis question_folder.
-    2. Pour chaque groupe, génère un petit dataset JSONL via generate_fr_dataset.
-    3. Concatène tous les petits datasets en un fichier JSONL unique à merged_output_path.
-    """
-    # Création du dossier temporaire
-    os.makedirs(temp_folder, exist_ok=True)
 
-    # Chargement des groupes de questions
+    os.makedirs(temp_folder, exist_ok=True)
     question_groups = load_question_groups(question_folder)
     temp_paths = []
 
-    # Génération des petits datasets
     for idx, questions in enumerate(question_groups, start=1):
         temp_path = os.path.join(temp_folder, f"small_dataset_{idx}.jsonl")
         print(f"Génération du dataset #{idx} → {temp_path}")
@@ -57,7 +44,6 @@ def run_fusion_pipeline(
         )
         temp_paths.append(temp_path)
 
-    # Fusion finale
     merged_entries = []
     for path in temp_paths:
         if os.path.exists(path):
@@ -65,7 +51,6 @@ def run_fusion_pipeline(
                 for line in f:
                     merged_entries.append(json.loads(line))
 
-    # Création du dossier parent pour le fichier fusionné
     os.makedirs(os.path.dirname(merged_output_path), exist_ok=True)
     print(f"Enregistrement du dataset fusionné → {merged_output_path}")
 

@@ -23,30 +23,25 @@ def generate_fr_base_questions(
     une question à la fois, et le place dans `output_dir`.
     Affiche chaque question dès qu'elle est générée.
     """
-    # Préparation du dossier de sortie et suppression d'un ancien fichier si besoin
     os.makedirs(output_dir, exist_ok=True)
     slug = slugify(topic)
     output_path = os.path.join(output_dir, f"{slug}.jsonl")
     if os.path.exists(output_path):
         os.remove(output_path)
 
-    # Initialisation du client Ollama
     client = Client()
     print(f"💻 Client Ollama initialisé avec '{model_name}' (GPU={'oui' if use_gpu else 'non'})\n")
 
-    # Prompt système fixe
     sys_prompt = (
         "Tu es un assistant expert en génération de questions simples. "
         "Tu ne renvoies **que** la question, sans guillemets superflus, "
         "sans numéros ni préfixes, juste le texte de la question."
     )
 
-    # Options de génération
     options = {"temperature": 0.7, "top_p": 0.9, "num_predict": 100}
     if use_gpu:
         options["device"] = "cuda"
 
-    # Boucle de génération
     with open(output_path, "w", encoding="utf-8") as fout:
         for i in range(1, num_questions + 1):
             user_prompt = (

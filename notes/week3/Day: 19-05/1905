@@ -1,0 +1,25 @@
+The dataset generation with the old program is complete. I’ll test it briefly with an initial fine-tuning.
+
+Fine-tuning the model (Llama-3.2-1B-Instruct-bnb-4bit):
+
+    Started: 10:00
+
+    Ended: 10:32
+
+As planned, the results aren’t good: the questions aren’t decomposed at all.
+
+I had another idea: fine-tune a model to identify all topics in a complex question. It might be simpler to then generate simple sub-questions around each topic. I’ll keep that in mind if the two datasets (generated with the second code) don’t work.
+
+Before the lunch break, I started generating a dataset with the new code.
+
+    Started: 12:04
+
+    Ended: — (I came back at 13:29)
+
+I then fine-tuned using the generated dataset (7,200 examples):
+
+    Started: 13:33
+
+    Ended: 13:51
+
+I ran it, and the results are better at low temperature but still not great. The model once identified a simple question from a large one. I think I could get even better results with a larger dataset, but my dataset generation isn’t perfect yet.

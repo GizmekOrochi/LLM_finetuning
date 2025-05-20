@@ -1,4 +1,4 @@
-Step-by-Step Explanation of generate_dataset.py
+Documentation
 
 1. Module Docstring
    - Describes the purpose: generate a JSONL dataset of specified size with simple question–answer pairs.

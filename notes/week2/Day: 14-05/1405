@@ -1,4 +1,4 @@
-I continu to work on my dataset I will try to generate multiple datasett big one and small to see what is the best for the task.
+I continu to work on my dataset I will try to generate multiple datasets, big and small to see what is the best for the task.
 qwen is not good for this task I think I need a model that don't. Liama 3.2 seems good.
 I have created a cool programm using GTP and the Ollama library to generate question from simples question for my dataset
 
@@ -6,7 +6,7 @@ questions_fr = [
     "Quand a eu lieu la Révolution française ?",
     "Qui était Napoléon Bonaparte ?"
 ]
-Edit : there is 60 simple questio in the programm.
+Edit : there is 60 simple questions in the programm.
 
 I tried all these questions after 2 hours and at 20%. I'm going to reduce the questions to do tests. I'm only taking 5.
 

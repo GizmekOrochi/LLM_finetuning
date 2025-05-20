@@ -32,6 +32,6 @@ The model should answer somthing like this:
 
 {question: "When did WW2 start"}{question: "Why did WW2 start"}
 
-I was given the tool Qwent to create datasets. I will investigate now. I am stopping Axolotl. I am making the dataset a priority.
+I was given the idea to use Qwent to create datasets. I will investigate now. I am stopping Axolotl. I am making the dataset a priority.
 
-I may use an LLM to help me create the dataset. I could, but I think I will look at the existing datasets on Hugging Face first. I may get ideas.
+I may use an LLM ( like Qwent ) to help me create the dataset. I could, but I think I will look at the existing datasets on Hugging Face first. I may get ideas.
